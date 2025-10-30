@@ -6,19 +6,27 @@
     <title>Document</title>
 </head>
 <body>
-    Splash
-
-    <a href="https://foss.app.n8n.cloud/form-test/eaf66b7a-a2eb-48d2-9957-810e487c5969">Link to movie form</a>
 
     <h1>Vanilla JavaScript App</h1>
     <p>Loading content from the API: <b id="name">...</b></p>
     </main>
 
+    <h1>n8n → Function → Frontend</h1>
+    <pre id="out">Loading…</pre>
     <script>
-    (async function() {
-        const { text } = await( await fetch(`/api/message`)).json();
-        document.querySelector('#name').textContent = text;
-    }());
+      async function load() {
+        try {
+          // If your function expects ?name=…:
+          const res = await fetch('/api/HttpTrigger1?name=Sirfoss');
+          // If your function returns JSON (like your echo code), do:
+          // const res = await fetch('/api/HttpTrigger1');
+          const text = await res.text(); // or res.json() if JSON
+          document.getElementById('out').textContent = text;
+        } catch (e) {
+          document.getElementById('out').textContent = 'Error: ' + e;
+        }
+      }
+      load();
     </script>
 </body>
 </html>
