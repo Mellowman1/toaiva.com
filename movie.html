@@ -9,5 +9,16 @@
     Splash
 
     <a href="https://foss.app.n8n.cloud/form-test/eaf66b7a-a2eb-48d2-9957-810e487c5969">Link to movie form</a>
+
+    <h1>Vanilla JavaScript App</h1>
+    <p>Loading content from the API: <b id="name">...</b></p>
+    </main>
+
+    <script>
+    (async function() {
+        const { text } = await( await fetch(`/api/message`)).json();
+        document.querySelector('#name').textContent = text;
+    }());
+    </script>
 </body>
 </html>
